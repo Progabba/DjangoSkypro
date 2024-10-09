@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load my_tags %}
 
 {% block title %}Главная - Alfastore{% endblock %}
 
@@ -17,7 +18,7 @@
             </div>
             <div class="card-body">
                 {% if product.image %}
-                    <img src="{{ product.image.url }}" class="img-fluid mb-3" alt="{{ product.name }}">
+                    <img src="{{ product.image | media_filter }}" class="img-fluid mb-3" alt="{{ product.name }}">
                 {% endif %}
                 <p>{{ product.discription|truncatechars:100 }}</p>
                 <h1 class="card-title pricing-card-title">{{ product.price }} руб.</h1>
