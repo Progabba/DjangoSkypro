@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+{% load my_tags %}
+{% block title %}Список статей{% endblock %}
+
+{% block content %}
+<h1>Список статей</h1>
+<ul class="list-group">
+  {% for post in posts %}
+    <li class="list-group-item">
+      <a href="{% url 'blog:post_detail' post.pk %}">{{ post.title }}</a>
+      {% if post.preview %}
+        <img src="{{ post.preview.url|media_filter }}" alt="Превью" class="img-thumbnail mb-3">
+      {% endif %}
+    </li>
+  {% empty %}
+    <li class="list-group-item">Нет опубликованных статей.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
