@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load my_tags %}
-
 {% block title %}Главная - Alfastore{% endblock %}
 
 {% block content %}
@@ -17,9 +16,9 @@
                 <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
             </div>
             <div class="card-body">
-                {% if product.image %}
-                    <img src="{{ product.image | media_filter }}" class="img-fluid mb-3" alt="{{ product.name }}">
-                {% endif %}
+
+                <img src="{{ product.image | media_filter }}" class="img-fluid mb-3" alt="{{ product.name }}">
+
                 <p>{{ product.discription|truncatechars:100 }}</p>
                 <h1 class="card-title pricing-card-title">{{ product.price }} руб.</h1>
                 <a href="{% url 'catalog:product_detail' product.id %}" class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
