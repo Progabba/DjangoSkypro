@@ -26,7 +26,7 @@ class BlogPostDetailView(DetailView):
         post = super().get_object(queryset)
         post.views_count += 1
         post.save()
-        if post.views_count == 13:
+        if post.views_count == 100:
             self.send_congratulatory_email()
         return post
 
