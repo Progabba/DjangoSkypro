@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'blog/base.html' %}
 {% load my_tags %}
 
 {% block title %}{{ post.title }}{% endblock %}
@@ -17,8 +17,6 @@
 
 <a href="{% url 'blog:post_edit' post.pk %}" class="btn btn-primary">Редактировать</a>
 <a href="{% url 'blog:post_delete' post.pk %}" class="btn btn-danger">Удалить</a>
-
-<!-- Кнопка "Назад" для возврата к списку статей -->
-<a href="{% url 'blog:post_list' %}" class="btn btn-secondary mt-3">Назад</a>
+<a href="{% url 'blog:post_list' %}" class="btn btn-secondary">Назад</a>
 
 {% endblock %}
