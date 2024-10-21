@@ -1,13 +1,16 @@
-from django.views.generic import ListView, DetailView, View
-from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, View, CreateView, UpdateView, DeleteView
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
+
+from catalog.forms import ProductForm
 from catalog.models import Product
 
 # Контроллер для главной страницы
-class HomeView(ListView):
-    model = Product
-    template_name = "home.html"
-    context_object_name = "products"
+# class HomeView(ListView):
+#     model = Product
+#     template_name = "product_list.html"
+#     context_object_name = "products"
 
 # Контроллер для страницы контактов
 class ContactsView(View):
@@ -27,32 +30,31 @@ class ProductDetailView(DetailView):
     model = Product
     template_name = "product_detail.html"
     context_object_name = "product"
-    pk_url_kwarg = "product_id"
 
 
 
-# def home(request):
-#     products = Product.objects.all()
-#     return render(request, "home.html", {"products": products})
-#
-#
-# # def contacts(request):
-# #     return render(request, 'contacts.html')
-#
-#
-# def contacts(request):
-#     if request.method == "POST":
-#         # Получение данных из формы
-#         name = request.POST.get("name")
-#         phone = request.POST.get("phone")
-#         message = request.POST.get("message")
-#         # Обработка данных (например, сохранение в БД, отправка email и т. д.)
-#         # Здесь мы просто возвращаем простой ответ
-#         return HttpResponse(f"Спасибо, {name}! Ваше сообщение получено.")
-#     return render(request, "contacts.html")
-#
-#
-#
-# def product_detail(request, product_id):
-#     product = get_object_or_404(Product, id=product_id)
-#     return render(request, "product_detail.html", {"product": product})
+
+
+
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'product_list.html'
+    context_object_name = 'products'
+
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'product_form.html'
+    success_url = reverse_lazy('catalog:product_list')
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'product_form.html'
+    success_url = reverse_lazy('catalog:product_list')
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = 'product_confirm_delete.html'
+    success_url = reverse_lazy('catalog:product_list')
