@@ -1,0 +1,7 @@
+<<h1>Войти</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }} <!-- Ошибки, которые не связаны с конкретными полями формы -->
+    {{ form.as_p }}
+    <button type="submit">Войти</button>
+</form>

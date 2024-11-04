@@ -21,9 +21,11 @@
 
                 <p>{{ product.discription|truncatechars:100 }}</p>
                 <h1 class="card-title pricing-card-title">{{ product.price }} руб.</h1>
+                {% if user.is_authenticated %}
                 <a href="{% url 'catalog:product_detail' product.id %}" class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
                 <a href="{% url 'catalog:product_update' product.pk %}">Редактировать</a>
                 <a href="{% url 'catalog:product_delete' product.pk %}">Удалить</a>
+                {% endif %}
             </div>
         </div>
     </div>
