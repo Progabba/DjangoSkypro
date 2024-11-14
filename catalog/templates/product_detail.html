@@ -23,14 +23,14 @@
             <a href="{% url 'catalog:product_list' %}" class="btn btn-outline-primary">Назад к списку товаров</a>
 
             <!-- Проверка прав на отмену публикации и удаление продукта -->
-            {% if user.has_perm 'catalog.can_unpublish_product' %}
-                <form action="{% url 'catalog:unpublish_product' product.id %}" method="post" style="display:inline;">
+            {% if  'catalog.can_unpublish_product' in perms %}
+                <form action="{% url 'catalog:product_unpublish' product.id %}" method="post" style="display:inline;">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-warning">Отменить публикацию</button>
                 </form>
             {% endif %}
 
-            {% if user.has_perm 'catalog.delete_product' %}
+            {% if 'catalog.delete_product' in perms %}
                 <form action="{% url 'catalog:product_delete' product.id %}" method="post" style="display:inline;">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">Удалить</button>
